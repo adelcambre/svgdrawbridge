@@ -1,0 +1,173 @@
+  [4;36;1mSQL (0.237197)[0m   [0;1mCREATE TABLE schema_info (version integer)[0m
+  [4;35;1mSQL (0.296513)[0m   [0mINSERT INTO schema_info (version) VALUES(0)[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;35;1mSQL (0.002035)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to CreateTags (1)
+  [4;36;1mSQL (0.000000)[0m   [0;1mSQLite3::SQLException: near ""policy"": syntax error: CREATE TABLE tags ("id" INTEGER PRIMARY KEY NOT NULL, "name" varchar(255), "node_id" integer, FOREIGN KEY (node_id) REFERENCES nodes (id), "policy" varchar(255)) [0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.002563)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to CreateTags (1)
+  [4;35;1mSQL (0.250414)[0m   [0mCREATE TABLE tags ("id" INTEGER PRIMARY KEY NOT NULL, "name" varchar(255), "node_id" integer, "policy" varchar(255)) [0m
+  [4;36;1mSQL (0.261799)[0m   [0;1mUPDATE schema_info SET version = 1[0m
+  [4;35;1mSQL (0.003241)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to CreateNodes (2)
+  [4;36;1mSQL (0.720351)[0m   [0;1mCREATE TABLE nodes ("id" INTEGER PRIMARY KEY NOT NULL, "hash" text) [0m
+  [4;35;1mSQL (0.295108)[0m   [0mUPDATE schema_info SET version = 2[0m
+  [4;36;1mSQL (0.003016)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to CreateElements (3)
+  [4;35;1mSQL (0.227367)[0m   [0mCREATE TABLE elements ("id" INTEGER PRIMARY KEY NOT NULL, "data" varchar(255)) [0m
+  [4;36;1mSQL (0.245919)[0m   [0;1mUPDATE schema_info SET version = 3[0m
+  [4;35;1mSQL (0.002879)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to CreateNodeElements (4)
+  [4;36;1mSQL (0.264568)[0m   [0;1mCREATE TABLE node_elements ("id" INTEGER PRIMARY KEY NOT NULL, "node_id" integer, "element_id" integer, "order" integer) [0m
+  [4;35;1mSQL (0.316851)[0m   [0mUPDATE schema_info SET version = 4[0m
+  [4;36;1mSQL (0.003400)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to CreateParentsTable (5)
+  [4;35;1mSQL (0.190420)[0m   [0mCREATE TABLE parents ("id" INTEGER PRIMARY KEY NOT NULL, "parent_id" integer, "child_id" integer) [0m
+  [4;36;1mSQL (0.218749)[0m   [0;1mUPDATE schema_info SET version = 5[0m
+  [4;35;1mSQL (0.003647)[0m   [0mSELECT * FROM schema_info[0m
+  [4;36;1mSQL (0.003510)[0m   [0;1mSELECT name FROM sqlite_master WHERE type = 'table'[0m
+  [4;35;1mSQL (0.000368)[0m   [0mPRAGMA table_info(elements)[0m
+  [4;36;1mSQL (0.000067)[0m   [0;1mPRAGMA index_list(elements)[0m
+  [4;35;1mSQL (0.000519)[0m   [0mPRAGMA table_info(node_elements)[0m
+  [4;36;1mSQL (0.000064)[0m   [0;1mPRAGMA index_list(node_elements)[0m
+  [4;35;1mSQL (0.000337)[0m   [0mPRAGMA table_info(nodes)[0m
+  [4;36;1mSQL (0.000061)[0m   [0;1mPRAGMA index_list(nodes)[0m
+  [4;35;1mSQL (0.000421)[0m   [0mPRAGMA table_info(parents)[0m
+  [4;36;1mSQL (0.000063)[0m   [0;1mPRAGMA index_list(parents)[0m
+  [4;35;1mSQL (0.000521)[0m   [0mPRAGMA table_info(tags)[0m
+  [4;36;1mSQL (0.000089)[0m   [0;1mPRAGMA index_list(tags)[0m
+  [4;36;1mSQL (0.008082)[0m   [0;1mPRAGMA table_info(nodes)[0m
+  [4;35;1mSQL (0.064248)[0m   [0mINSERT INTO nodes ("hash") VALUES(NULL)[0m
+  [4;36;1mSQL (0.000183)[0m   [0;1mINSERT INTO nodes ("hash") VALUES(NULL)[0m
+  [4;35;1mSQL (0.000520)[0m   [0mPRAGMA table_info(parents)[0m
+  [4;36;1mSQL (0.000760)[0m   [0;1mINSERT INTO parents ("id", "child_id", "parent_id") VALUES (2, 2, 1)[0m
+  [4;35;1mNode Load (0.005358)[0m   [0mSELECT * FROM nodes WHERE (nodes.id = 1) LIMIT 1[0m
+  [4;36;1mSQL (0.000593)[0m   [0;1mPRAGMA table_info(parents)[0m
+  [4;35;1mNode Load (0.046874)[0m   [0mSELECT * FROM nodes INNER JOIN parents ON nodes.id = parents.child_id WHERE (parents.parent_id = 1 ) [0m
+  [4;36;1mSQL (0.000617)[0m   [0;1mPRAGMA table_info(parents)[0m
+  [4;35;1mNode Load (0.003518)[0m   [0mSELECT * FROM nodes INNER JOIN parents ON nodes.id = parents.parent_id WHERE (parents.child_id = 2 ) [0m
+  [4;36;1mSQL (0.000593)[0m   [0;1mPRAGMA table_info(parents)[0m
+  [4;35;1mNode Load (0.006603)[0m   [0mSELECT * FROM nodes INNER JOIN parents ON nodes.id = parents.child_id WHERE (parents.parent_id = 2 ) [0m
+  [4;36;1mNode Update (0.071782)[0m   [0;1mUPDATE nodes SET "hash" = 'asdf' WHERE id = 1[0m
+  [4;35;1mNode Load (0.012360)[0m   [0mSELECT * FROM nodes [0m
+  [4;36;1mSQL (0.109479)[0m   [0;1mDELETE FROM parents WHERE parent_id = 1 AND child_id IN (2)[0m
+  [4;35;1mNode Update (0.300150)[0m   [0mUPDATE nodes SET "hash" = 'asdf' WHERE id = 1[0m
+  [4;36;1mNode Load (0.009756)[0m   [0;1mSELECT * FROM nodes WHERE (nodes.id = 1) LIMIT 1[0m
+  [4;35;1mNode Load (0.004183)[0m   [0mSELECT * FROM nodes WHERE (nodes.id = 2) LIMIT 1[0m
+  [4;36;1mNode Update (0.073143)[0m   [0;1mUPDATE nodes SET "hash" = 'asdf' WHERE id = 1[0m
+  [4;35;1mNode Update (0.104681)[0m   [0mUPDATE nodes SET "hash" = 'foobar' WHERE id = 2[0m
+  [4;36;1mSQL (0.000580)[0m   [0;1mPRAGMA table_info(parents)[0m
+  [4;35;1mNode Load (0.011773)[0m   [0mSELECT * FROM nodes INNER JOIN parents ON nodes.id = parents.child_id WHERE (parents.parent_id = 1 ) [0m
+  [4;36;1mSQL (0.000500)[0m   [0;1mPRAGMA table_info(parents)[0m
+  [4;35;1mSQL (0.114438)[0m   [0mINSERT INTO parents ("id", "child_id", "parent_id") VALUES (2, 2, 1)[0m
+  [4;36;1mNode Update (0.085097)[0m   [0;1mUPDATE nodes SET "hash" = 'asdf' WHERE id = 1[0m
+  [4;36;1mNode Load (0.010683)[0m   [0;1mSELECT * FROM nodes WHERE (nodes.id = 1) LIMIT 1[0m
+  [4;35;1mNode Load (0.003808)[0m   [0mSELECT * FROM nodes WHERE (nodes.id = 2) LIMIT 1[0m
+  [4;36;1mSQL (0.000554)[0m   [0;1mPRAGMA table_info(nodes)[0m
+  [4;35;1mSQL (0.000485)[0m   [0mPRAGMA table_info(parents)[0m
+  [4;36;1mNode Load (0.038528)[0m   [0;1mSELECT * FROM nodes INNER JOIN parents ON nodes.id = parents.child_id WHERE (parents.parent_id = 1 ) [0m
+  [4;35;1mSQL (0.000599)[0m   [0mPRAGMA table_info(parents)[0m
+  [4;36;1mNode Load (0.006146)[0m   [0;1mSELECT * FROM nodes INNER JOIN parents ON nodes.id = parents.parent_id WHERE (parents.child_id = 2 ) [0m
+  [4;36;1mNode Load (0.005876)[0m   [0;1mSELECT * FROM nodes WHERE (nodes.id = 1) LIMIT 1[0m
+  [4;35;1mSQL (0.000565)[0m   [0mPRAGMA table_info(nodes)[0m
+  [4;36;1mSQL (0.000482)[0m   [0;1mPRAGMA table_info(parents)[0m
+  [4;35;1mNode Load (0.003492)[0m   [0mSELECT * FROM nodes INNER JOIN parents ON nodes.id = parents.child_id WHERE (parents.parent_id = 1 ) [0m
+  [4;36;1mNode Update (0.083612)[0m   [0;1mUPDATE nodes SET "hash" = 'asdf' WHERE id = 1[0m
+  [4;35;1mNode Load (0.009425)[0m   [0mSELECT * FROM nodes WHERE (nodes.id = 2) LIMIT 1[0m
+  [4;36;1mNode Load (0.005488)[0m   [0;1mSELECT * FROM nodes WHERE (nodes.id = 1) LIMIT 1[0m
+  [4;35;1mNode Update (0.051043)[0m   [0mUPDATE nodes SET "hash" = 'barfoo' WHERE id = 2[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.001917)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.001485)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.001462)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.001422)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.001417)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.001500)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to AddTimestampsToNodes (6)
+  [4;36;1mSQL (0.015631)[0m   [0;1mPRAGMA table_info(nodes)[0m
+  [4;35;1mSQL (0.000341)[0m   [0mPRAGMA table_info(nodes)[0m
+  [4;36;1mSQL (0.000539)[0m   [0;1mCREATE TEMPORARY TABLE altered_nodes ("id" INTEGER PRIMARY KEY NOT NULL, "hash" text) [0m
+  [4;35;1mSQL (0.000062)[0m   [0mPRAGMA index_list(nodes)[0m
+  [4;36;1mSQL (0.050002)[0m   [0;1mDROP TABLE nodes[0m
+  [4;35;1mSQL (0.000378)[0m   [0mPRAGMA table_info(altered_nodes)[0m
+  [4;36;1mSQL (0.000333)[0m   [0;1mPRAGMA table_info(altered_nodes)[0m
+  [4;35;1mSQL (0.000207)[0m   [0mCREATE TABLE nodes ("id" INTEGER PRIMARY KEY NOT NULL, "hash" text, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.000068)[0m   [0;1mPRAGMA index_list(altered_nodes)[0m
+  [4;35;1mSQL (0.000115)[0m   [0mDROP TABLE altered_nodes[0m
+  [4;36;1mSQL (0.171264)[0m   [0;1mUPDATE schema_info SET version = 6[0m
+  [4;35;1mSQL (0.001821)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to ChangeTagsToHandles (7)
+  [4;36;1mSQL (0.000584)[0m   [0;1mPRAGMA table_info(tags)[0m
+  [4;35;1mSQL (0.000540)[0m   [0mPRAGMA table_info(tags)[0m
+  [4;36;1mSQL (0.155270)[0m   [0;1mCREATE TABLE handles ("id" INTEGER PRIMARY KEY NOT NULL, "name" varchar(255), "node_id" integer, "policy" varchar(255)) [0m
+  [4;35;1mSQL (0.000067)[0m   [0mPRAGMA index_list(tags)[0m
+  [4;36;1mSQL (0.169056)[0m   [0;1mDROP TABLE tags[0m
+  [4;35;1mSQL (0.151878)[0m   [0mUPDATE schema_info SET version = 7[0m
+  [4;36;1mSQL (0.001736)[0m   [0;1mSELECT * FROM schema_info[0m
+  [4;35;1mSQL (0.001696)[0m   [0mSELECT name FROM sqlite_master WHERE type = 'table'[0m
+  [4;36;1mSQL (0.000332)[0m   [0;1mPRAGMA table_info(elements)[0m
+  [4;35;1mSQL (0.000065)[0m   [0mPRAGMA index_list(elements)[0m
+  [4;36;1mSQL (0.000540)[0m   [0;1mPRAGMA table_info(handles)[0m
+  [4;35;1mSQL (0.000064)[0m   [0mPRAGMA index_list(handles)[0m
+  [4;36;1mSQL (0.000539)[0m   [0;1mPRAGMA table_info(node_elements)[0m
+  [4;35;1mSQL (0.000065)[0m   [0mPRAGMA index_list(node_elements)[0m
+  [4;36;1mSQL (0.000416)[0m   [0;1mPRAGMA table_info(nodes)[0m
+  [4;35;1mSQL (0.000065)[0m   [0mPRAGMA index_list(nodes)[0m
+  [4;36;1mSQL (0.000418)[0m   [0;1mPRAGMA table_info(parents)[0m
+  [4;35;1mSQL (0.000062)[0m   [0mPRAGMA index_list(parents)[0m
+  [4;36;1mNode Load (0.003922)[0m   [0;1mSELECT * FROM nodes WHERE (nodes.id = 1) LIMIT 1[0m
+  [4;35;1mSQL (0.000736)[0m   [0mPRAGMA table_info(handles)[0m
+  [4;36;1mNode Load (0.005020)[0m   [0;1mSELECT * FROM nodes WHERE (nodes.id = 1) LIMIT 1[0m
+  [4;35;1mSQL (0.000751)[0m   [0mPRAGMA table_info(handles)[0m
+  [4;36;1mSQL (0.000607)[0m   [0;1mPRAGMA table_info(nodes)[0m
+  [4;35;1mHandle Load (0.002849)[0m   [0mSELECT * FROM handles WHERE (handles.node_id = 1) [0m
+  [4;36;1mSQL (0.050344)[0m   [0;1mINSERT INTO handles ("name", "policy", "node_id") VALUES('foobar', NULL, 1)[0m
+  [4;35;1mHandle Update (0.059957)[0m   [0mUPDATE handles SET "name" = 'foobar', "node_id" = 1, "policy" = NULL WHERE id = 1[0m
+  [4;36;1mNode Update (0.048844)[0m   [0;1mUPDATE nodes SET "hash" = 'asdf', "updated_at" = '2006-07-24 16:02:27' WHERE id = 1[0m
+  [4;36;1mSQL (0.003259)[0m   [0;1mPRAGMA table_info(handles)[0m
+  [4;35;1mHandle Load (0.002181)[0m   [0mSELECT * FROM handles WHERE (handles."name" = 'foobar' ) LIMIT 1[0m
+  [4;36;1mSQL (0.003043)[0m   [0;1mPRAGMA table_info(handles)[0m
+  [4;35;1mHandle Load (0.002133)[0m   [0mSELECT * FROM handles WHERE (handles."name" = 'foobar' ) LIMIT 1[0m
+  [4;36;1mNode Load (0.001686)[0m   [0;1mSELECT * FROM nodes WHERE (nodes.id = 1) LIMIT 1[0m
+  [4;35;1mSQL (0.000582)[0m   [0mPRAGMA table_info(nodes)[0m
+  [4;36;1mSQL (0.000475)[0m   [0;1mPRAGMA table_info(parents)[0m
+  [4;35;1mNode Load (0.003134)[0m   [0mSELECT * FROM nodes INNER JOIN parents ON nodes.id = parents.child_id WHERE (parents.parent_id = 1 ) [0m
+  [4;36;1mSQL (0.000585)[0m   [0;1mPRAGMA table_info(parents)[0m
+  [4;35;1mNode Load (0.002133)[0m   [0mSELECT * FROM nodes INNER JOIN parents ON nodes.id = parents.child_id WHERE (parents.parent_id = 2 ) [0m
+  [4;36;1mSQL (0.003033)[0m   [0;1mPRAGMA table_info(elements)[0m
+  [4;35;1mSQL (0.000693)[0m   [0mPRAGMA table_info(handles)[0m
+  [4;36;1mHandle Load (0.003310)[0m   [0;1mSELECT * FROM handles WHERE (handles."name" = 'foobar' ) LIMIT 1[0m
+  [4;35;1mNode Load (0.002217)[0m   [0mSELECT * FROM nodes WHERE (nodes.id = 1) LIMIT 1[0m
+  [4;36;1mSQL (0.000568)[0m   [0;1mPRAGMA table_info(nodes)[0m
+  [4;36;1mSQL (0.003088)[0m   [0;1mPRAGMA table_info(handles)[0m
+  [4;35;1mHandle Load (0.002274)[0m   [0mSELECT * FROM handles WHERE (handles."name" = 'foobar' ) LIMIT 1[0m
+  [4;36;1mSQL (0.000491)[0m   [0;1mPRAGMA table_info(elements)[0m
+  [4;35;1mNode Load (0.001820)[0m   [0mSELECT * FROM nodes WHERE (nodes.id = 1) LIMIT 1[0m
+  [4;36;1mSQL (0.000583)[0m   [0;1mPRAGMA table_info(nodes)[0m
+  [4;36;1mSQL (0.009431)[0m   [0;1mPRAGMA table_info(elements)[0m
+  [4;35;1mSQL (0.048242)[0m   [0mINSERT INTO elements ("data") VALUES('<line>')[0m
+  [4;36;1mSQL (0.000699)[0m   [0;1mPRAGMA table_info(handles)[0m
+  [4;35;1mHandle Load (0.002706)[0m   [0mSELECT * FROM handles WHERE (handles."name" = 'foobar' ) LIMIT 1[0m
+  [4;36;1mNode Load (0.002066)[0m   [0;1mSELECT * FROM nodes WHERE (nodes.id = 1) LIMIT 1[0m
+  [4;35;1mSQL (0.000570)[0m   [0mPRAGMA table_info(nodes)[0m
+  [4;36;1mElement Load (0.004325)[0m   [0;1mSELECT * FROM elements WHERE (elements.id = 1) LIMIT 1[0m
+  [4;35;1mHandle Load (0.002228)[0m   [0mSELECT * FROM handles WHERE (handles.id = 1) LIMIT 1[0m
+  [4;36;1mSQL (0.000739)[0m   [0;1mPRAGMA table_info(handles)[0m
+  [4;35;1mNode Load (0.002724)[0m   [0mSELECT * FROM nodes WHERE (nodes.id = 1) LIMIT 1[0m
+  [4;36;1mSQL (0.000557)[0m   [0;1mPRAGMA table_info(nodes)[0m
+  [4;35;1mSQL (0.000521)[0m   [0mPRAGMA table_info(elements)[0m
+  [4;36;1mElement Load (0.004542)[0m   [0;1mSELECT * FROM elements WHERE (elements.id = 1) LIMIT 1[0m
+  [4;35;1mHandle Load (0.003043)[0m   [0mSELECT * FROM handles WHERE (handles.id = 1) LIMIT 1[0m
+  [4;36;1mSQL (0.000749)[0m   [0;1mPRAGMA table_info(handles)[0m
+  [4;35;1mNode Load (0.002117)[0m   [0mSELECT * FROM nodes WHERE (nodes.id = 1) LIMIT 1[0m
+  [4;36;1mSQL (0.000557)[0m   [0;1mPRAGMA table_info(nodes)[0m
+  [4;35;1mElement Load (0.003782)[0m   [0mSELECT elements.* FROM elements INNER JOIN node_elements ON elements.id = node_elements.element_id WHERE (node_elements.node_id = 1) [0m
+  [4;36;1mHandle Update (0.095582)[0m   [0;1mUPDATE handles SET "name" = 'foobar', "node_id" = 1, "policy" = NULL WHERE id = 1[0m
+  [4;35;1mSQL (0.000432)[0m   [0mPRAGMA table_info(elements)[0m
+  [4;36;1mElement Update (0.050147)[0m   [0;1mUPDATE elements SET "data" = '<line>' WHERE id = 1[0m
+  [4;35;1mNodeElement Load (0.003637)[0m   [0mSELECT * FROM node_elements WHERE (node_elements.node_id = 1) [0m
+  [4;36;1mSQL (0.003516)[0m   [0;1mPRAGMA table_info(nodes)[0m
+  [4;35;1mSQL (0.055191)[0m   [0mINSERT INTO nodes ("updated_at", "hash") VALUES('2006-07-25 17:24:56', NULL)[0m

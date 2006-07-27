@@ -1,0 +1,4 @@
+#!/bin/bash
+uid=`id -u`
+port=`expr $uid + 20000`
+mongrel_rails start -d -p $port
