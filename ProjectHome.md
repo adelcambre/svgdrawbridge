@@ -1,0 +1,1 @@
+Drawbridge is a webased digital whiteboard allowing multiple users to concurrently edit the same drawing.  The backend is a novel graph based revision control system, which attempts to move away from a document centric view of the world. The back end is written in ruby on rails, with the front end primarily consisting of standalone javascript.
